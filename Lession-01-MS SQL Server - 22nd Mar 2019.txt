@@ -1,0 +1,119 @@
+https://github.com/vimleshtech/mssql-learing
+==================================================
+
+
+Today's Topics
+=======================
+-MS SQL Server Fundamental
+-Server Structure and Credential
+-SQL Commands and command type
+-DDL(create, aleter, drop , truncate)
+-DML (insert, update, delete)
+-DQL (select)
+-where and operator
+-Order by / sorting
+-Group by , having 
+-aggregate function 
+
+
+
+
+MS SQL Server - Fundamental
+=============================
+MS 	: Microsoft
+SQL 	: Structural query langauge
+Server	: Physical location where data can be stored 
+
+DBMS 	: Database management system(where data can be stored in tabular structure)
+	-file system 
+		-MS Excel 
+		-MS Access
+		-Foxpro 	
+		etc.
+RDBMS	: Relational database management system 
+		-MS SQL Server
+		-My SQL Server
+		-Oracle
+		-IBM DB2
+		etc.	
+	
+	-Client server architecture 
+	
+	MS SQL Server:
+			2017
+			2016	*
+			2014	*
+			2012	**
+			2008R8
+			2008
+			2005
+			2000
+
+
+Server Structure and Credential
+========================================
+SSMS : SQL Server management studio (client tool)
+	
+Server : DH7U0SGH527SKS1\DBS91
+	ipaddress(computername)/instancename 
+	
+	-SQL Server Enterprise Edition(Paid)
+	-SQL Server Express(Free)	
+
+
+Credential Types:
+	-Windows    (work on windows login)	 
+	-SQL Server (id and pwd required)
+
+
+Database: is relatioal schema(group of objects:table,function,procedure,trigger) where data can be stored 
+	-System database
+		-master
+		-tempdb
+		-model
+		-msdb		
+	-User database : custom / created by user 
+		
+		create database <amazon>;
+
+		
+		
+
+Note:
+	SQL is not case sensetive 
+
+
+
+Excel		rdbs
+-----------------------
+workbook	database
+worksheet	table
+row		row/tuple
+col/field	col/field/attribute 
+
+SQL Commands and command type
+===================================
+There are following types of SQL command:
+	-DDL: Data Defination Language
+		-create		: create new table
+		-alter		: modify the existing structure
+		-drop		: remove the structure 
+		-truncate	: remove all data from table, but structure will 				remain same 
+	-DML: Data Manipulaiton Language	
+		-insert	: save data
+		-update	: modify data
+		-delete : delete data 
+
+	-DCL: Data Control Language
+	-TCL: Transaction Control Language
+	-DQL: Data Query Language 
+		-select 	: view data 
+
+	
+
+dbo: database object
+
+
+
+
+				
