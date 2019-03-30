@@ -1,0 +1,204 @@
+My SQL Server - Database Environment
+DDL Statement
+DML Statement
+Where clause, Operator
+Order By
+Function 
+Group By, Having
+
+My SQL Server - Database Environment
+=========================================
+RDBMS : Realational database management system 
+Product's List:
+	-MS SQL Server
+	-MY SQL Server   **
+	-Oracle 
+	-IBM DB2
+	etc.
+
+Database : is relational schema where data can be stored in tabular format
+Schema : is group of objects(table, function , procedure etc.)
+
+Table  : is entity which contains structure and data (combination of row and column)
+
+Row   : is also known as tuple or record
+
+Column : is also known as attribute 
+
+SQL(Structural query langugae) Command Type:
+==================================================
+-DDL	: data defination language 
+	-create		: create new object(table, function etc)
+	-alter		: modify the existing object/strucutre 
+	-drop		: delete the object/physical struture  
+	-truncate 	: remove all data but structure will reamin same 	
+-DML	: data manipulation language 
+	-insert		 : save data
+	-update		 : modify data 
+	-delete 	 : remove data (with or without condition)
+-TCL	: transaction control languate 
+	-begin tran	: start the recoding / manage the state of data 
+	-commit		: save the process/transaction 
+	-rollback	: cancel the process
+-DCL	: data control language (security)
+	-create user
+	-grant permission
+	-revoke/denay access 
+-DQL	: data query language
+	-select	: view data 
+
+
+
+Example:  Creat database for amazone
+
+
+---- DDL ----------------------
+create database <amazon>;   --create new database 
+
+show databases;			--show list of existing databases
+
+
+use <amazon>;			--change database 
+
+
+create table <users>(id int, name varchar(30), email varchar(20));   --create new table
+
+
+show tables;		--show list of existing tabales
+
+
+
+alter table users add pwd  varchar(30);   --add new column 
+
+alter table users modify pwd varchar(200); --chane size 
+
+alter table  users drop column pwd;   --remove column 
+
+
+drop table users;			--drop table 
+
+
+truncate table users;			--remove all data from table, but structure will remain same 				
+---------------DML -----------------------------
+insert into users(id,name,email) values(1,'raman','raman@gmail.com');  --save data 
+
+
+select * from users;  --* : show all columns , show data
+
+
+select name,email  from users;  --show selected column
+
+select * from users where id =1;   --show selected rows
+
+update  users set name='new name' where id =1;  --change  name
+
+
+delete from users where id=1;   --remove row 
+
+
+
+
+Where clause, Operator
+==================================
+where : to filter or select data based on given condition 
+
+select * from where id =1;
+
+conditioal Operator:
+	=
+	>
+	>=
+	<
+	<=
+	!=
+Keyword:
+	in
+	not in
+	between
+	not between
+	is null
+	is not null
+	
+select * from users where id =1;
+
+select * from users where id >1;
+select * from users where id >=2;
+select * from users where id <4;
+select * from users where id <=10;
+select * from users where id !=1;
+
+select * from users where id in (1,4,6,7,90);
+
+select * from users where id not in(1,5,6);
+
+`		select * from users where id between 1 and 10;  --inclusive
+
+select * from users where id not between 3 and 5;   
+
+select * from users where name is not null;
+
+select * from users where name is null;
+
+--and , or
+select * from users where name='aman'   and id > 4;
+
+
+select * from users where gender='female'   or country 'india';
+
+
+Order By : arrang data in asceding or decending order
+==========================
+
+select * from users order by name ; --default is asc
+select * from users order by name asc;
+
+
+select * from users order id desc;
+
+select * from users order id desc, name asc;
+
+Function 
+=========================
+max()
+min()
+avg()
+sum()
+count()
+left()
+rigth()
+length()
+
+
+select max(id) from users;
+select min(id) from users;
+select sum(id) from users;
+select count(id) from users; --no of rows
+select avg(id) from users;
+select left(name,3) from users;
+select right(name,2) from users;
+select left(name,3) from users;
+select length(name)  from users;
+
+
+
+Group By, Having
+====================================         
+group by : summarize the data 
+
+select gender, count(*) from users group by gender;
+
+male  - 4
+femlae - 3
+
+
+having : can be use only with group by 
+	-filter the row after group by
+
+select gender, count(*) from users group by gender having count(*) > 1;
+
+
+male -1  : will not show 
+female -3
+
+
+AUTO_INCREMENT Primary Key : generates series of numbers starting from 1; but the initial no. can be changed also 
