@@ -1,0 +1,117 @@
+/*
+DDL
+		CREATE 
+		ALTER
+		DROP      **
+	    TRUNCATE   **
+DML
+	    SELECT
+		INSERT
+		UPDATE
+		DLEETE  **
+		
+WHERE 		
+OPERATOR
+ORDER BY
+GROUP BY
+CASE WHEN   **
+DATA TYPE 
+CONSTRAINTS 
+JOIN 
+*/			
+
+USE HRMS
+/* CROSS JOIN : IS ALSO KNOWN AS CARTISAN PRODUCT */
+ -- CROSS JOIN IS NOT RECOMMENDED (this will decrease the performance)
+ select * from J_employee
+ select * from J_salary
+ --inner join 
+ select e.eid,e.name,e.email,s.sal
+ from J_employee e inner join J_salary s
+	on e.eid  = s.id 
+
+--cross join   : table1 10 rows,  table2 2  = 10*2 = 20 rows    
+select * 
+from J_employee, J_salary
+where J_employee.eid = J_salary.id 
+
+--q : table1  = 3 ,  and table2  = 0  =
+select *				--output = 3
+from J_employee --(3)
+, J_salary   -- (no rows)
+
+
+/* SELF JOIN : join the table with same table replica 
+EID  ENAME   MGRID
+1    RAMAN   NULL
+2    JATIN   1
+3    RAHUL   1
+4    AYUSH   2
+5    MONIKA  3
+
+OUTPUT:
+----
+EID   ENAME   MGRNAME
+1    RAMAN   NULL
+2    JATIN   RAMAN
+3    RAHUL   RAMAN
+4    AYUSH   JATIN
+5    MONIKA  RAHUL
+
+ */
+
+
+ SELECT * FROM J_EMPLOYEE
+ ALTER TABLE J_EMPLOYEE
+ ADD  MGR_ID INT
+
+ UPDATE J_EMPLOYEE
+ SET MGR_ID = 1
+ WHERE EID IN(2,4,5)
+
+ UPDATE J_EMPLOYEE
+ SET MGR_ID = 2
+ WHERE EID =3
+
+ UPDATE J_EMPLOYEE
+ SET MGR_ID = 3
+ WHERE EID =6
+
+
+ --SELF JOIN 
+ SELECT E.EID, E.NAME , M.name AS MGRNAME
+ FROM J_EMPLOYEE  E LEFT JOIN J_EMPLOYEE M
+	ON E.MGR_ID = M.EID 
+
+/* REFERANCTIAL JOIN */
+
+SELECT * FROM J_EMPLOYEE
+SELECT * FROM J_SALARY
+
+--ADD PRIMARY ON EID COLUMN 
+ALTER TABLE J_EMPLOYEE
+ADD CONSTRAINT PK_TEST_ID PRIMARY KEY(EID)  --HERE (PK_TEST_ID) PRIMARY KEY NAME WHICH IS USER DEFINED 
+
+  
+
+CREATE TABLE R_SALARY (
+EID INT FOREIGN KEY REFERENCES J_EMPLOYEE(EID), --THIS COLUMN WILL ALLOW ONLY VALUE WHISH IS EXIST IN EMPLOYEE TABLE AND EID COLUMN  OR NULL VALUE 
+BASIC  INT,
+HRA INT,
+DA  INT
+)
+
+INSERT INTO R_SALARY
+VALUES(300,566666,33333,5666)
+
+
+
+SELECT  e.eid, e.name, s.BASIC,s.DA,s.HRA
+FROM j_employee E inner join R_SALARY s 
+	on e.eid = s.EID
+
+
+
+
+ 
+		
