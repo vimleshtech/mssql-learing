@@ -1,0 +1,209 @@
+
+/******************************/
+/****************** 
+keywords:
+===================================
+-distinct   : to return unique value /rows
+-top		: return top given rows 
+-into		: create new table from existing table 
+		    : make the replica of existing table
+-union		: to merge two or more than two tables vertically 
+		    : table structure (no of columns and data type should be same in selection)
+			: there are following types of union:
+					i. union      : return distinct/unique rows
+					ii. union all : return all rows 
+					 
+-functions   : is inbuilt set of statement or logic which can be call / execute/reuse 
+			-Aggregiate function 
+					-function which will return single value after summarize the data from one column
+			-Scaller function 
+					-function which will return single value
+			-Tabular Function 
+					-function which will return multiple values
+
+
+*******************/
+use hrms
+
+select * from j_employee
+
+insert into j_employee
+values('nitin','nitin@gamil.com','m','india',NULL)
+
+--distinct : show list of unique gender
+select distinct gender from j_employee
+
+select distinct * from j_employee
+
+select distinct NAME,email,gender,COUNTRY,MGR_ID from j_employee 
+
+		
+--show top 2 rows
+select top 2 * from j_employee
+
+select top 5 * from j_employee
+
+--from buttom
+select top 4 * from j_employee order by eid desc
+
+--- into : create new table from existing table
+select * into new_table from j_employee
+
+select * from new_table 
+
+--create new table with condition 
+select * into male_table  from j_employee where gender = 'm'
+
+ 
+ select * from male_table
+
+--copy 
+select * into male_table  from j_employee where gender = 'm'
+
+
+
+/*** union */
+
+delete  from j_employee where eid <3 
+delete  from new_table where eid <3 
+
+
+select * from j_employee
+select * from new_table
+
+
+--union 
+select * from j_employee
+union 
+select * from new_table
+union 
+select * from new_table
+union 
+select * from new_table
+union 
+select * from new_table
+
+--union  all
+select * from j_employee
+union all
+select * from new_table
+union all
+select * from new_table
+union all
+select * from new_table
+
+
+--structure 
+select eid,name from new_table
+union 
+select eid,name from new_table
+
+select eid,name from new_table
+union 
+select eid,name from new_table
+
+
+---Aggregiate function 
+--max()
+--min()
+--sum()
+--count()
+--avg()
+--std()
+
+
+select max(eid) from j_employee
+select min(eid) from j_employee
+select sum(eid) from j_employee
+select avg(eid) from j_employee
+select stdev (eid) from j_employee
+
+select count(eid) from j_employee
+select count(*) from j_employee
+select count(mgr_id) from j_employee
+select * from j_employee
+
+select max(eid),min(eid), avg(eid), sum(eid) from j_employee
+
+-----------scaller function : text function 
+select * from j_employee
+--upper  : convert to upper case
+--lower  : convert to lower case
+--len    : return count of chars
+--left   : return given no of chars from left
+--right  : return given no of chars from right
+--replace  : find and repalce with given char
+--charindex  : return position of given char
+--ltrim    : remove space from left
+--rtrim    : remove space from right 
+--substring : return based on given range
+
+
+select eid, name, upper(name) from j_employee
+select eid, name, lower(name) from j_employee
+select *, name, len(name) from j_employee
+select eid, name, left(name,3) from j_employee
+select eid, name, right(name,3) from j_employee
+select eid, name, replace(name,'a','xy') from j_employee
+
+select eid, name, charindex('a',name) from j_employee
+select eid, name, ltrim(name) from j_employee
+select eid, name, rtrim(name) from j_employee
+select eid, name, substring(name,2,5) from j_employee
+
+
+select eid, name, substring(name,1,charindex(' ',name)) from j_employee
+
+select eid, name, substring(name,1, len(name) - charindex(' ',name)) from j_employee
+
+
+---date time 
+select getdate()  --yyyy-mm-dd hh:mm:ss.mis
+
+select DATEPART(year, getdate())
+select DATEPART(DAY, getdate())
+select DATEPART(MONTH, getdate())
+select DATEPART(DAYOFYEAR, getdate())
+select DATEPART(QUARTER, getdate())
+select DATEPART(WEEKDAY, getdate())  --1 sunday 
+
+select DATEPART(WEEKDAY, '1990-11-29')
+
+select dateadd(year,10,getdate())
+
+select  DATEPART(weekday, dateadd(year,10,getdate()))
+
+--date diff
+select datediff(year,'1990-11-29',getdate())
+select datediff(month,'1990-11-29',getdate())
+select datediff(day,'1990-11-29',getdate())
+
+select datediff(HOUR,'1990-11-29',getdate())
+select datediff(WEEK,'1990-11-29',getdate())
+ 
+
+--type conversion 
+select * from j_employee
+
+select convert(varchar, eid) + name from j_employee
+
+select cast( eid as varchar) + name from j_employee
+
+--
+select convert(varchar, getdate(),101)
+select convert(varchar, getdate(),102)
+select convert(varchar, getdate(),103)
+select convert(varchar, getdate(),105)
+select convert(varchar, getdate(),106)
+select convert(varchar, getdate(),107)
+select convert(varchar, getdate(),108)
+
+
+---
+select * from employee
+select eid, fname+ isnull(mname,' ')+isnull(lname,'') as fullname from employee
+
+
+select 1+null 
+
+
