@@ -1,0 +1,150 @@
+
+/*
+View : is virtual table which contains structure but not data
+     : is wrapper over the table (to hide and show the columns )
+	 : we can insert data using view in a table (if there is one table is in use)
+	 : view can be used as physical table
+
+*/
+
+--create view 
+
+select * from j_employee
+
+insert into j_employee values('ab','m','india',1,'44')
+
+use hrms 
+
+create view v_empdetails
+as
+select eid as emp_code,
+		name,
+		case when gender ='m'
+				then 'male'
+				else 'female'
+				end as gender
+	from j_employee
+
+create view v_empdetails1
+as
+select *
+	from j_employee
+
+
+select * from v_empdetails
+
+insert into v_empdetails1(name,gender)
+values('aayushi','f')
+
+
+
+/*
+TL-SQL : transactional sql  (programing in sql)
+-variable 
+		declare @a int   --here @a is variable 
+
+-set   : assign data 
+		set @a =10 
+
+-condition : if condition 
+		if @a % 2 = 0
+		begin  --true 
+				select "even" 
+		end
+		else --false 
+		begin
+
+				select "odd "
+		end
+
+-Loop : is iterator , repeation of statement or code 
+		declare @i int 
+		set @i =1
+		
+		while @i<10
+		begin
+			select @i
+			set @i = @i+1
+		end
+		 
+*/
+--Example
+declare @a int 
+set @a =10
+select @a +10
+
+--Example : addition two numbers
+declare @a1 int,
+        @a2 int,
+		@n  int
+
+set @a1 =11
+set @a2 =90
+set @n = @a1 + @a2 
+select @n
+
+--condition 
+declare @d int =11  --assign with declaration 
+--set @d =10
+
+if @d % 2  = 0
+begin
+	select 'even no'
+end
+else
+begin
+	select 'odd no'
+end
+
+-- loop 
+declare @i int =1
+while @i<=100 
+begin
+	--select @i 
+	print @i 
+	set @i = @i+1
+end
+
+
+/*
+proc : is also called stored procedure 
+     : procedure is precompiled code which enhance the perfomance of sql script
+*/
+
+select * from j_employee 
+where eid =1
+
+alter proc emp_action
+(
+@action char(1),
+@name varchar(100) ='',
+@gender char(1) =''
+)
+as
+begin
+
+		if @action = 'I'
+		begin
+					insert into j_employee(name,gender)
+					values(@name,@gender)
+		end
+		else if @action ='s'
+		begin
+				select * from j_employee
+		end 
+		else 
+		begin
+					select 'given option didnt match'
+		end
+
+end
+
+
+
+
+
+emp_action 'i','Monika','f'
+
+emp_action 's','Monika','f'
+
+emp_action 's'
